@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath ("org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE")
+
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = 'springboot'
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+bootRun {
+    systemProperties = [
+            "spring.boot.property.location" : "file:" + rootProject.projectDir.path + "/appconfig/spring.boot.local.properties"
+    ]
+}
+
+bootRepackage{
+    mainClass = 'com.spring.boot.Main'
+}
